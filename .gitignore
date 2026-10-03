@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+drives/*/run.log
+drives/*/status.json
+*.tmp

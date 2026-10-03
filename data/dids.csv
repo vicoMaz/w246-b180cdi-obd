@@ -1,0 +1,93 @@
+did,name,category,formula,unit,confidence,source,notes
+2001,Coolant temperature,temperature,((A*256+B)-2730)/10,°C,confirmed,both,exact fit with PID 05
+2007,Coolant temperature (copy),temperature,((A*256+B)-2730)/10,°C,confirmed,logs,same value as 2001
+244D,Air temperature before intake throttle,temperature,((A*256+B)-2730)/10,°C,confirmed,both,r = 0.98 with PID 0F
+240D,Intake air temperature,temperature,((A*256+B)-2730)/10,°C,probable,both,r = 0.90 with PID 0F
+2008,Fuel temperature,temperature,((A*256+B)-2730)/10,°C,confirmed,both,slow rise 30 -> 66 °C over a drive
+2439,Turbine inlet temperature,temperature,((A*256+B)-2730)/10,°C,probable,both,"100..545 °C, rises with load"
+2438,Turbine inlet temperature setpoint,temperature,((A*256+B)-2730)/10,°C,listed,list,constant 700 °C outside regeneration
+2442,DPF inlet temperature,temperature,((A*256+B)-2730)/10,°C,confirmed,both,~340 °C at motorway cruise
+2432,DPF inlet temperature setpoint,temperature,((A*256+B)-2730)/10,°C,listed,list,constant 640 °C outside regeneration
+2441,Exhaust temperature downstream of 2442 (DPF outlet?),temperature,((A*256+B)-2730)/10,°C,probable,logs,not in the list; lags 2442
+2801,Rail pressure,fuel,A*256+B,bar,confirmed,both,≈ 0.975 × PID 23 + 24
+2802,Rail pressure setpoint,fuel,A*256+B,bar,probable,both,"follows 2801, r = 0.985"
+2806,Injected fuel quantity,fuel,(A*256+B)/100,mg/stroke,confirmed,both,"~4 idle, ~14 at 110 km/h, ~42 full load, 0 on overrun fuel cut"
+2809,Total injection system quantity,fuel,(A*256+B)/100,mg/stroke,probable,both,"r = 0.975 with 2806, ~7 % lower"
+280D,Fuel quantity after main injection (post-injection 1),fuel,(A*256+B)/100,mg/stroke,listed,list,expected to rise during a regeneration
+280E,Fuel quantity after main injection (post-injection 2),fuel,(A*256+B)/100,mg/stroke,listed,list,expected to rise during a regeneration
+2813,Post-injection timing,fuel,((A*256+B)-32767)/50,° crank,listed,list,
+2102,Fuel consumed,fuel,5*(A*256+B)/100,l,listed,list,trip computer value
+2103,Fuel flow,fuel,A,l/h,listed,list,trip computer value
+FD07,Fuel flow correction cylinder 1,cylinder,(A*256+B)*0.0000305,factor,probable,both,1.00 = no correction. Updates only at idle. FD07..FD0A average 1.00 (balance)
+FD08,Fuel flow correction cylinder 2,cylinder,(A*256+B)*0.0000305,factor,probable,both,see FD07
+FD09,Fuel flow correction cylinder 3,cylinder,(A*256+B)*0.0000305,factor,probable,both,see FD07
+FD0A,Fuel flow correction cylinder 4,cylinder,(A*256+B)*0.0000305,factor,probable,both,see FD07
+FD15,Adaptation status cylinder 1,cylinder,A,code,listed,list,read 7 on every drive
+FD16,Adaptation status cylinder 2,cylinder,A,code,listed,list,read 7 on every drive
+FD17,Adaptation status cylinder 3,cylinder,A,code,listed,list,read 7 on every drive
+FD18,Adaptation status cylinder 4,cylinder,A,code,listed,list,read 7 on every drive
+FD19,Per-cylinder value 1 (unnamed in the list),cylinder,((A*256+B)-32768)/2041.466,,listed,list,static during a drive
+FD1A,Per-cylinder value 2 (unnamed in the list),cylinder,((A*256+B)-32768)/2041.466,,listed,list,static during a drive
+FD1B,Per-cylinder value 3 (unnamed in the list),cylinder,((A*256+B)-32768)/2041.466,,listed,list,static during a drive
+FD1C,Per-cylinder value 4 (unnamed in the list),cylinder,((A*256+B)-32768)/2041.466,,listed,list,static during a drive
+FDB6,Rail fuel pressure regulator valve duty cycle,fuel,(A*256+B)/655.36,%,listed,list,21..25 % at idle and driving. FDB7..FDBA are refused by this ECU
+2002,Engine speed,engine,(A*256+B)/4,rpm,probable,both,r = 0.91 with PID 0C (readings up to 2.5 s apart)
+2067,Total engine torque,engine,(A*256+B)/32,Nm,probable,logs,"~30 idle, ~97 cruise, ~282 full load. 2068 and 2069 are copies"
+2004,Engine torque,engine,((A*256+B)-12800)/32,Nm,listed,list,weak match with 2067 (r = 0.44)
+202E,Accelerator pedal position,engine,(A*256+B)/8,%,listed,list,0..31 % on the logged drives; not verified
+2C04,Gear engaged (code − 1 = gear),engine,A&7,gear,probable,both,codes 2..7 match gears 1..6 by km/h per 1000 rpm (8.4 / 15.9 / 25.5 / 36.4 / – / 55); 1 = neutral or clutch
+2050,Displayed vehicle speed,engine,(A*256+B)/100,km/h,listed,list,always 0 on this car
+2005,ECU supply voltage,engine,(A*256+B)/100,V,probable,both,"14.1..14.9 V with the engine running, matches adapter voltage"
+2009,Atmospheric pressure,air,A*256+B,mbar,probable,both,1001..1008 mbar
+2401,Boost pressure,air,A*256+B,mbar,probable,both,r = 0.90 with 10 × PID 0B
+2402,Boost pressure setpoint,air,A*256+B,mbar,probable,both,"follows 2401, r = 0.78"
+240B,Manifold pressure,air,A*256+B,mbar,listed,list,"r = 0.68 with 10 × PID 0B; range 790..2520, may be a setpoint"
+24E1,Manifold pressure (uncorrected),air,A*256+B,mbar,confirmed,logs,"r = 0.94, slope 0.94 with 10 × PID 0B (kPa)"
+2403,Boost control solenoid duty cycle,air,(A*256+B)/100,%,listed,list,
+24F2,Measured air mass flow,air,(A*256+B)/10,kg/h,probable,both,"r = 0.84 with PID 10 (MAF converted to kg/h), reads ~20 % lower"
+2412,Intake air per stroke,air,(A*256+B)/10,mg/stroke,listed,list,200..1720 mg/stroke; pairs with 2413
+2413,Intake air per stroke setpoint,air,(A*256+B)/10,mg/stroke,probable,both,"follows 2412, r = 0.99"
+2421,Estimated air flow,air,(A*256+B)/10,mg/stroke,listed,list,"350..910 mg/stroke, plausible for a 1.5 l with boost"
+2448,Turbine inlet pressure,air,A*256+B,mbar,probable,both,"1000..3800 mbar, rises with load"
+2404,Intake throttle position,air,(A*256+B)/20.491,%,listed,list,reads 78.6..79.4 when PID 11 reads 89.4..89.8; no regeneration logged to check movement
+2405,Intake throttle setpoint,air,((A*256+B)-31981)/20,%,listed,list,"decodes to ~140 %, formula probably wrong"
+2407,EGR valve position,air,(A*256+B)/20.491,%,listed,list,"mostly 0, max 36 %; does not follow 259B (r = 0.35)"
+2408,EGR valve setpoint,air,(A*256+B)/20.491,%,listed,list,"constant 1580 % on this car, formula probably wrong"
+2409,EGR valve command,air,((A*256+B)-32767)/100,%,listed,list,
+256B,EGR valve position (logs) or exhaust flap position (list),air,(A*256+B)/20.492,%,conflict,both,r = 0.98 with 259B but not with 2407 (r = 0.36). The list meaning comes from the K9K 636 variant with low-pressure EGR. 256A = 256B + 0x8000
+259B,EGR valve position sensor voltage,air,A*256+B,mV,probable,logs,~890 open ... 3945 closed; pinned closed on fuel cut and full load
+2527,Actuator setpoint (turbo vanes?),air,(A*256+B)/100,%,candidate,logs,
+2528,Actuator position (turbo vanes?),air,(A*256+B)/100,%,candidate,logs,
+242C,Soot mass in DPF,dpf,(A*256+B)/100,g,probable,both,"5.7 -> 14.3 g over three days of short drives, only rises while driving"
+2542,DPF differential pressure,dpf,(A*256+B)-32768,mbar,probable,both,"2..114 mbar, rises with exhaust flow (r = 0.74 with MAF)"
+24FB,DPF differential pressure (corrected),dpf,(A*256+B)-32768,mbar,listed,list,
+2447,Exhaust flow through DPF,dpf,(A*256+B)/10,m³/h,probable,both,"3..430 m³/h, rises with load"
+2488,Engine running time since last regeneration,dpf,(A*256+B)/3600,h,confirmed,both,+1 per second of running; restarted right after an observed regeneration
+2487,Duration of last regeneration,dpf,(A*256+B)/600,min,listed,list,
+2481,Successful regenerations,dpf,A,count,listed,list,
+2485,Failed regeneration attempts,dpf,A,count,listed,list,
+24A9,Distance since last successful regeneration,dpf,A*65536+B*256+C,km,listed,list,
+24A5,Soot mass after last regeneration,dpf,(A*256+B)/100,g,listed,list,
+24BB,Distance since DPF replacement,dpf,A*65536+B*256+C,km,listed,list,
+2166,Regeneration allowed,dpf,A,status,listed,list,
+246D,Regeneration command,dpf,A,status,listed,list,
+2434,Static regeneration,dpf,A,status,listed,list,
+2810,Soot estimate?,dpf,(A*256+B)-32768,,candidate,logs,
+2489,Oil viscosity loss,oil,(A*256+B)/655,%,listed,list,
+2294,Oil dilution,oil,((A*16777216+B*65536+C*256+D)-(4294967296 if A>127 else 0))/214748364.8,%,listed,list,"decodes oddly on this car, unverified"
+2006,Odometer,counter,A*65536+B*256+C,km,confirmed,both,+1.01 per km driven
+2003,Vehicle speed,counter,(A*256+B)/100,km/h,confirmed,both,"r = 0.999, slope 1.00 with PID 0D. Earlier 'distance accumulator' guess was wrong"
+2168,Engine start counter 4,counter,A*65536+B*256+C,count,listed,list,
+2169,Engine start counter 3,counter,A*65536+B*256+C,count,listed,list,
+216A,Engine start counter 2,counter,A*65536+B*256+C,count,listed,list,
+216B,Engine start counter 1,counter,A*65536+B*256+C,count,listed,list,
+210E,Crankshaft revolutions,counter,A*256+B,million,listed,list,
+25B1,ECU clock,counter,A*256+B,min,probable,logs,keeps counting with the ignition off
+2296,Running timer,counter,(A*256+B)/10,s,confirmed,logs,+10.0 per second
+2557,Running timer,counter,(A*256+B)/10,s,confirmed,logs,+10.0 per second
+28B4,Learned injector correction table 1 of 8 (8 values),cylinder,,raw,candidate,logs,"8 signed 16-bit values centred on 0x8000, static. Same for 28B5..28BB"
+2465,Injector code slot? (4 records 2465..2468),cylinder,,raw,candidate,logs,only 2468 filled on this car
+2061,Unknown injection parameter,fuel,A*256+B,raw,candidate,logs,0x3200 at idle; 2062 and 2063 similar
+F190,VIN,identification,,ASCII,confirmed,standard,ISO 14229 standard identifier
+F111,ECU part number,identification,,ASCII,confirmed,standard,
+F121,ECU software number,identification,,ASCII,confirmed,standard,

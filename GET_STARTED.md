@@ -16,7 +16,7 @@ The **OBD port** is under the dashboard on the driver's side, above the pedals.
 ## 2. Get the code
 
 ```bash
-git clone https://github.com/<owner>/w246-b180cdi-obd.git
+git clone https://github.com/vicoMaz/w246-b180cdi-obd.git
 cd w246-b180cdi-obd
 ```
 
